@@ -8,3 +8,5 @@ export 'src/data/repository/client.dart';
 
 export 'src/data/storage/storage.dart';
 
+export 'src/domain/query_helper/query_helper.dart';
+
