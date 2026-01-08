@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 class QueryHelper {
   Future<void> request<T>({
     required Future<T> Function() request,
-    required Function(T) onResponse,
-    required Function(String) onError,
+    required void Function(T) onResponse,
+    required void Function(String) onError,
   }) async {
     try {
       T response = await request();
