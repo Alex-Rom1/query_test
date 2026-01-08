@@ -15,13 +15,14 @@ class ItemModel extends BaseModel {
     required this.title,
   });
 
-  ItemModel.fromJSON(Map<String, dynamic> json) : this(
-    created: DateTime.parse(json['created']),
-    description: json['description'],
-    id: json['id'],
-    price: json['price'],
-    title: json['title'],
-  );
+  ItemModel.fromJSON(Map<String, dynamic> json)
+    : this(
+        created: DateTime.parse(json['created']),
+        description: json['description'],
+        id: json['id'],
+        price: json['price'],
+        title: json['title'],
+      );
 
   @override
   Map<String, dynamic> toJSON() => {
