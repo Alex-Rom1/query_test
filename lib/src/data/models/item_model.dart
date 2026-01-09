@@ -17,7 +17,7 @@ class ItemModel extends BaseModel {
 
   @override
   Map<String, dynamic> toJSON() => {
-    'created': created,
+    'created': created.toIso8601String(),
     'description': description,
     'id': id,
     'price': price,
@@ -26,7 +26,7 @@ class ItemModel extends BaseModel {
 
   ItemModel.fromJSON(Map<String, dynamic> json)
     : this(
-        created: json['created'],
+        created: DateTime.parse(json['created']),
         description: json['description'],
         id: json['id'],
         price: json['price'],
