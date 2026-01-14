@@ -8,3 +8,6 @@ export 'src/data/repository/client.dart';
 
 export 'src/data/storage/storage.dart';
 
+export 'src/domain/query_helper/query_helper.dart';
+export 'src/domain/use_cases/query_use_case.dart';
+
