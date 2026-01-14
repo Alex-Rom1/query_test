@@ -4,6 +4,7 @@ import 'package:querylib_test3/querylib_test3.dart';
 class QueryUseCase {
   final Client _client = Client(storage: Storage(), dio: Dio());
   final QueryHelper _helper = QueryHelper();
+  AuthModel? get lastAuth => _client.lastAuth;
 
   Future<void> signup({
     required Function(UserModel) onResponse,
