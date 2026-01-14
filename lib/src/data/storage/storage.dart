@@ -1,3 +1,3 @@
 class Storage {
-  String apiUrl = 'http://127.0.0.1:8090/api';
+  static const String apiUrl = 'http://127.0.0.1:8090/api';
 }
