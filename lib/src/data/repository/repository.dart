@@ -9,8 +9,17 @@ abstract interface class Repository {
     required String passwordConfirm,
   });
 
-  Future<AuthModel> login({
-  required String identity,
-  required String password,
+  Future<AuthModel> login({required String identity, required String password});
+
+  Future<UserModel> getUser({required String id});
+
+  Future<NoteModel> createNote({
+    required String userId,
+    required String name,
+    required String text,
   });
+
+  Future<NoteModel> getNote({required String id});
+
+  Future<void> logout();
 }

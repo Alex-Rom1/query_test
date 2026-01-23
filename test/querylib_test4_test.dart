@@ -18,6 +18,7 @@ void onResponse(dynamic obj, Type expectedType) {
 void onError(String e) => fail(e);
 
 void main() {
+  late NoteModel note;
   group('test query', () {
     test('signup', () async {
       await _useCase.signup(
@@ -34,6 +35,44 @@ void main() {
         identity: email,
         password: password,
         onResponse: (obj) => onResponse(obj, AuthModel),
+        onError: onError,
+      );
+    });
+
+    test('get user', () async {
+      await _useCase.getUser(
+        id: _useCase.lastAuth!.record.id,
+        onResponse: (obj) => onResponse(obj, UserModel),
+        onError: onError,
+      );
+    });
+
+    test('create note', () async {
+      await _useCase.createNote(
+        userId: _useCase.lastAuth!.record.id,
+        name: 'example note',
+        text: 'tests are pain',
+        onResponse: (obj) {
+          onResponse(obj, NoteModel);
+          note = obj;
+        },
+        onError: onError,
+      );
+    });
+
+    test('get note', () async {
+      await _useCase.getNote(
+        id: note.id,
+        onResponse: (obj) => onResponse(obj, NoteModel),
+        onError: onError,
+      );
+    });
+
+    test('logout', () async {
+      await _useCase.logout(
+        onResponse: (_) {
+          assert(_useCase.lastAuth == null);
+        },
         onError: onError,
       );
     });

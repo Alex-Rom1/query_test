@@ -49,4 +49,35 @@ class Client implements Repository {
     _lastAuth = .fromJSON(response.data);
     return _lastAuth!;
   }
+
+  @override
+  Future<NoteModel> createNote({
+    required String userId,
+    required String name,
+    required String text,
+  }) async {
+    var response = await _dio.post(
+      '$_notesUrl/records',
+      data: {'userId': userId, 'name': name, 'text': text},
+      options: _options,
+    );
+    return NoteModel.fromJSON(response.data);
+  }
+
+  @override
+  Future<NoteModel> getNote({required String id}) async {
+    var response = await _dio.get('$_notesUrl/records/$id', options: _options);
+    return NoteModel.fromJSON(response.data);
+  }
+
+  @override
+  Future<void> logout() async {
+    _lastAuth = null;
+  }
+
+  @override
+  Future<UserModel> getUser({required String id}) async {
+    var response = await _dio.get('$_usersUrl/records/$id', options: _options);
+    return UserModel.fromJSON(response.data);
+  }
 }

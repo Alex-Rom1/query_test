@@ -39,4 +39,53 @@ class QueryUseCase {
       onError: onError,
     );
   }
+
+  Future<void> getUser({
+    required String id,
+    required Function(UserModel) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.getUser(id: id),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
+
+  Future<void> createNote({
+    required String userId,
+    required String name,
+    required String text,
+    required Function(NoteModel) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.createNote(userId: userId, name: name, text: text),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
+
+  Future<void> getNote({
+    required String id,
+    required Function(NoteModel) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.getNote(id: id),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
+
+  Future<void> logout({
+    required Function(void) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.logout(),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
 }
