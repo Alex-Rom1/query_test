@@ -98,6 +98,11 @@ class Client implements Repository {
   }
 
   @override
+  Future<void> deleteNote({required String id}) async {
+    await _dio.delete('$_notesUrl/records/$id', options: _options);
+  }
+
+  @override
   Future<void> logout() async {
     _lastAuth = null;
   }

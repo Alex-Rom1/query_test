@@ -30,5 +30,9 @@ abstract interface class Repository {
     required String text,
   });
 
+  Future<void> deleteNote({
+    required String id,
+  });
+
   Future<void> logout();
 }

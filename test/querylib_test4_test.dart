@@ -84,8 +84,27 @@ void main() {
         onResponse: (obj) {
           onResponse(obj, NoteModel);
           if (obj.runtimeType == NoteModel) {
-            assert (obj.text == 'changed text');
+            assert(obj.text == 'changed text');
           }
+        },
+        onError: onError,
+      );
+    });
+
+    test('delete note', () async {
+      await _useCase.deleteNote(
+        id: note.id,
+        onResponse: (obj) async {
+          late List<NoteModel> notes;
+          await _useCase.getNoteList(
+            onResponse: (obj) => {notes = obj},
+            onError: (String e) {
+              fail(
+                'Did not manage to get notes list for checking whether the delete worked ot not\nReason: $e',
+              );
+            },
+          );
+          assert(notes.isEmpty);
         },
         onError: onError,
       );
