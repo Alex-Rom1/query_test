@@ -89,6 +89,26 @@ class QueryUseCase {
     );
   }
 
+  Future<void> updateNote({
+    required String noteId,
+    required String userId,
+    required String name,
+    required String text,
+    required Function(NoteModel) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.updateNote(
+        noteId: noteId,
+        userId: userId,
+        name: name,
+        text: text,
+      ),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
+
   Future<void> logout({
     required Function(void) onResponse,
     required Function(String) onError,

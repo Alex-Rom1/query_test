@@ -83,6 +83,21 @@ class Client implements Repository {
   }
 
   @override
+  Future<NoteModel> updateNote({
+    required String noteId,
+    required String userId,
+    required String name,
+    required String text,
+  }) async {
+    var response = await _dio.patch(
+      '$_notesUrl/records/$noteId',
+      data: {'userId': userId, 'name': name, 'text': text},
+      options: _options,
+    );
+    return NoteModel.fromJSON(response.data);
+  }
+
+  @override
   Future<void> logout() async {
     _lastAuth = null;
   }

@@ -23,5 +23,12 @@ abstract interface class Repository {
 
   Future<List<NoteModel>> getNoteList();
 
+  Future<NoteModel> updateNote({
+    required String noteId,
+    required String userId,
+    required String name,
+    required String text,
+  });
+
   Future<void> logout();
 }

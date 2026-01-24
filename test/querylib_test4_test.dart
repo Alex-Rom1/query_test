@@ -51,7 +51,7 @@ void main() {
       await _useCase.createNote(
         userId: _useCase.lastAuth!.record.id,
         name: 'example note',
-        text: 'tests are pain',
+        text: 'example text',
         onResponse: (obj) {
           onResponse(obj, NoteModel);
           note = obj;
@@ -71,6 +71,22 @@ void main() {
     test('get note list', () async {
       await _useCase.getNoteList(
         onResponse: (obj) => onResponse(obj, List<NoteModel>),
+        onError: onError,
+      );
+    });
+
+    test('update note', () async {
+      await _useCase.updateNote(
+        noteId: note.id,
+        userId: _useCase.lastAuth!.record.id,
+        name: note.name,
+        text: 'changed text',
+        onResponse: (obj) {
+          onResponse(obj, NoteModel);
+          if (obj.runtimeType == NoteModel) {
+            assert (obj.text == 'changed text');
+          }
+        },
         onError: onError,
       );
     });
