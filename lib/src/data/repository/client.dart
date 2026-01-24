@@ -51,6 +51,12 @@ class Client implements Repository {
   }
 
   @override
+  Future<UserModel> getUser({required String id}) async {
+    var response = await _dio.get('$_usersUrl/records/$id', options: _options);
+    return UserModel.fromJSON(response.data);
+  }
+
+  @override
   Future<NoteModel> createNote({
     required String userId,
     required String name,
@@ -71,13 +77,13 @@ class Client implements Repository {
   }
 
   @override
-  Future<void> logout() async {
-    _lastAuth = null;
+  Future<List<NoteModel>> getNoteList() async {
+    var response = await _dio.get('$_notesUrl/records', options: _options);
+    return NoteModel.fromJSONList(response.data['items']);
   }
 
   @override
-  Future<UserModel> getUser({required String id}) async {
-    var response = await _dio.get('$_usersUrl/records/$id', options: _options);
-    return UserModel.fromJSON(response.data);
+  Future<void> logout() async {
+    _lastAuth = null;
   }
 }

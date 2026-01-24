@@ -78,6 +78,17 @@ class QueryUseCase {
     );
   }
 
+  Future<void> getNoteList({
+    required Function(List<NoteModel>) onResponse,
+    required Function(String) onError,
+  }) async {
+    await _helper.request(
+      request: () => _client.getNoteList(),
+      onResponse: onResponse,
+      onError: onError,
+    );
+  }
+
   Future<void> logout({
     required Function(void) onResponse,
     required Function(String) onError,

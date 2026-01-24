@@ -68,6 +68,13 @@ void main() {
       );
     });
 
+    test('get note list', () async {
+      await _useCase.getNoteList(
+        onResponse: (obj) => onResponse(obj, List<NoteModel>),
+        onError: onError,
+      );
+    });
+
     test('logout', () async {
       await _useCase.logout(
         onResponse: (_) {
